@@ -1,0 +1,40 @@
+[package]
+name = "imgalifier-avif"
+description = "Pure-Rust AVIF decoder: reuses the HEIF container and pipeline, adds an AV1 still-picture backend (vendored rav1d)"
+readme = "README.md"
+keywords = ["heic", "heif", "avif", "image", "decoder"]
+categories = ["multimedia::images", "multimedia::encoding"]
+version = "0.1.0"
+# The vendored rav1d sources are written for edition 2021.
+edition = "2021"
+license = "MIT AND BSD-2-Clause"
+authors = ["Rafał Mikrut <mikrutrafal@protonmail.com>"]
+repository = "https://github.com/qarmin/imgalifier"
+rust-version = "1.85"
+
+[features]
+# `register_decoding_hooks()` for the `image` crate (avif extension)
+image = ["imgalifier-heif/image"]
+default = ["bitdepth_8", "bitdepth_16"]
+bitdepth_8 = []
+bitdepth_16 = []
+
+[dependencies]
+imgalifier-heif = { path = "../heif", version = "0.1.0", default-features = false }
+# dependencies of the vendored rav1d (all pure Rust)
+atomig = { version = "0.4.0", features = ["derive"] }
+bitflags = "2.4.0"
+cfg-if = "1.0.0"
+parking_lot = "0.12.2"
+paste = "1.0.14"
+static_assertions = "1.1.0"
+strum = { version = "0.27", features = ["derive"] }
+to_method = "1.1.0"
+zerocopy = { version = "0.7.32", features = ["derive"] }
+
+[dev-dependencies]
+png = "0.18"
+image = { version = "0.25", default-features = false, features = ["bmp"] }
+
+[lints]
+workspace = true

@@ -1,0 +1,9 @@
+/target
+core.[0-9]*
+/references
+/tmp
+/binaries
+fuzz/target
+fuzz/corpus
+fuzz/artifacts
+fuzz/Cargo.lock

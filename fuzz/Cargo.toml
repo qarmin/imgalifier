@@ -1,0 +1,36 @@
+[package]
+name = "imgalifier-fuzz"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+imgalifier-heif = { path = "../crates/heif" }
+imgalifier-avif = { path = "../crates/avif" }
+
+[workspace]
+
+[[bin]]
+name = "heic"
+path = "fuzz_targets/heic.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "avif"
+path = "fuzz_targets/avif.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "container"
+path = "fuzz_targets/container.rs"
+test = false
+doc = false
+
+[profile.release]
+debug = 1
